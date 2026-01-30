@@ -268,4 +268,25 @@ textarea{ resize:vertical; }
   .kv{ grid-template-columns: 1fr; }
 }
 
+/* 헤더 상단 액션(메인으로 버튼) */
+.header-actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top: 8px;
+}
+
+.header-home{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:40px;
+  padding:0 12px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,0.06);
+  font-weight:650;
+  white-space:nowrap;
+}
+.header-home:hover{ background:rgba(0,0,0,0.10); }
+
 
