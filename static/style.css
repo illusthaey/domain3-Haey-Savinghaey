@@ -128,11 +128,12 @@ textarea{ resize:vertical; }
   font-size:0.95rem;
 }
 .header-rule{
-  margin-top:14px;
-  height:8px;
-  background:rgba(0,0,0,0.18);
-  border-radius:999px;
+  margin-top: 14px;
+  height: 3px;
+  background: rgba(0,0,0,0.12); \
+  border-radius: 999px;
 }
+
 
 /* =============================
    상세페이지 메뉴바
@@ -265,3 +266,4 @@ textarea{ resize:vertical; }
 @media (max-width:640px){
   .kv{ grid-template-columns: 1fr; }
 }
+
