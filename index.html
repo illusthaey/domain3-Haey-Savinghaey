@@ -3,57 +3,79 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>개인용 업무 보조 - 대시보드</title>
+  <title>개인 업무 보조 웹페이지</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
   <div id="app-nav"></div>
 
   <main class="container">
-    <h1>대시보드</h1>
-    <p class="subtitle">데이터는 <code>data/store.json</code>에서만 관리합니다. (웹은 읽기 전용)</p>
+    <section class="section">
+      <h2 class="local-h2">메뉴</h2>
+      <div class="menu-cards">
+        <a class="menu-card" href="/tools.html">
+          <div class="title">업무 효율화 도구 모음</div>
+          <div class="desc">업무를 입력→변환→출력 단계로 구조화하는 도구/링크 모음</div>
+          <span class="btn go">이동</span>
+        </a>
 
-    <div id="metaInfo" class="row wrap" style="gap:8px;"></div>
+        <a class="menu-card" href="/assist-tools.html">
+          <div class="title">업무보조 도구 모음</div>
+          <div class="desc">문서편집(정리/치환/템플릿) 등 “즉시 복사-붙여넣기” 도구</div>
+          <span class="btn go">이동</span>
+        </a>
+
+        <a class="menu-card" href="/calendar.html">
+          <div class="title">일정 달력</div>
+          <div class="desc">월/주/3일 뷰로 일정 조회 (store.json 기반)</div>
+          <span class="btn go">이동</span>
+        </a>
+
+        <a class="menu-card" href="/favorites.html">
+          <div class="title">즐겨찾기</div>
+          <div class="desc">자주 쓰는 사이트 링크 모음 (store.json 기반)</div>
+          <span class="btn go">이동</span>
+        </a>
+
+        <a class="menu-card" href="/manuals.html">
+          <div class="title">편람(PDF)</div>
+          <div class="desc">편람 목록 검색/열람 (store.json 기반)</div>
+          <span class="btn go">이동</span>
+        </a>
+      </div>
+
+      <div class="muted" style="margin-top:12px;">
+        · 데이터 수정: GitHub에서 <code>data/store.json</code> 편집 후 커밋<br/>
+        · 본 사이트는 읽기 전용 운영(웹에서 저장 기능 없음)
+      </div>
+    </section>
 
     <section class="section">
-      <h2 class="local-h2">오늘 일정(상위 3건)</h2>
+      <h2 class="local-h2">오늘 요약</h2>
       <div id="todayList"></div>
-      <div class="muted" style="margin-top:10px;">· 일정 추가/수정은 GitHub에서 <code>data/store.json</code> 편집</div>
+      <div class="muted" style="margin-top:10px;">· 오늘 일정은 <code>calendar.events</code>에서 관리</div>
     </section>
 
     <section class="section">
       <h2 class="local-h2">결재권자 복무상황</h2>
       <div id="approverList"></div>
-      <div class="muted" style="margin-top:10px;">· 복무상황 갱신은 GitHub에서 <code>approvers.status</code> 편집</div>
-    </section>
-
-    <section class="section">
-      <h2 class="local-h2">즐겨찾기(상위 6건)</h2>
-      <div id="favList"></div>
-      <div class="muted" style="margin-top:10px;">· 즐겨찾기 관리는 GitHub에서 <code>favorites.items</code> 편집</div>
-    </section>
-
-    <section class="section">
-      <h2 class="local-h2">편람 빠른 검색(상위 5건)</h2>
-      <input type="text" id="manualMiniQ" placeholder="예: 예산 / 계약 / 2026 ..." />
-      <div id="manualMiniList" style="margin-top:10px;"></div>
-      <div class="muted" style="margin-top:10px;">· 편람 목록은 GitHub에서 <code>manuals.list</code> 편집</div>
+      <div class="muted" style="margin-top:10px;">· 복무상황은 <code>approvers.status</code>에서 관리</div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="shell"><p>© 2026. 개인용 업무보조 페이지 · 읽기 전용</p></div></footer>
-
   <script src="/static/app.js"></script>
   <script src="/static/dashboard.js"></script>
+
   <script>
-    App.mountNav();
-    Dashboard.init().catch(err => {
+    App.mountHeader();
+    Dashboard.initMini().catch(err => {
       console.error(err);
-      document.querySelector(".container").insertAdjacentHTML(
-        "afterbegin",
-        `<div class="section"><div class="muted">데이터 로드 실패: data/store.json 경로 및 GitHub Pages 배포 상태를 확인하세요.</div></div>`
-      );
+      document.getElementById("todayList").innerHTML = `<div class="muted">데이터 로드 실패: store.json 경로 확인</div>`;
     });
   </script>
+
+  <script src="/static/footer.js"></script>
+  <script src="/static/disable-copy.js"></script>
+  <script src="/static/global-loader.js?v=1"></script>
 </body>
 </html>

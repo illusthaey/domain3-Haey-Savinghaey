@@ -1,9 +1,8 @@
 // static/app.js
 (function () {
   const NAV = [
-    { href: "/index.html", label: "대시보드" },
     { href: "/tools.html", label: "업무 효율화 도구 모음" },
-    { href: "/assist-tools.html", label: "업무보조 도구 모음" },   // ← 신규
+    { href: "/assist-tools.html", label: "업무보조 도구 모음" },
     { href: "/calendar.html", label: "일정 달력" },
     { href: "/favorites.html", label: "즐겨찾기" },
     { href: "/manuals.html", label: "편람(PDF)" }
@@ -48,7 +47,26 @@
     }
   }
 
-  function navHTML(activePath){
+  function isIndexPage() {
+    const p = location.pathname.endsWith("/") ? "/index.html" : location.pathname;
+    return p === "/index.html";
+  }
+
+  function headerOnlyHTML(){
+    return `
+      <header class="site-header">
+        <div class="shell">
+          <div class="header-hero">
+            <h1 class="header-title">(타이틀) 개인 업무 보조 웹페이지</h1>
+            <div class="header-byline">-제작·운영: 천재 고주무관</div>
+            <div class="header-rule" aria-hidden="true"></div>
+          </div>
+        </div>
+      </header>
+    `;
+  }
+
+  function headerWithNavHTML(activePath){
     const items = NAV.map(n => {
       const active = activePath === n.href;
       const cls = active ? "nav-btn is-active" : "nav-btn";
@@ -59,24 +77,30 @@
     return `
       <header class="site-header">
         <div class="shell">
-          <div class="topbar">
-            <div class="brand">
-              <div class="brand-title">개인용 업무 보조</div>
-              <div class="brand-sub">운영: GitHub에서 JSON/소스 직접 수정(읽기 전용)</div>
-            </div>
-            <nav class="nav" aria-label="상단 메뉴">
-              ${items}
-            </nav>
+          <div class="header-hero">
+            <h1 class="header-title">(타이틀) 개인 업무 보조 웹페이지</h1>
+            <div class="header-byline">-제작·운영: 천재 고주무관</div>
+            <div class="header-rule" aria-hidden="true"></div>
           </div>
+
+          <nav class="nav" aria-label="상단 메뉴">
+            ${items}
+          </nav>
         </div>
       </header>
     `;
   }
 
-  function mountNav(){
+  function mountHeader(){
     const here = location.pathname.endsWith("/") ? "/index.html" : location.pathname;
     const el = document.getElementById("app-nav");
-    if (el) el.innerHTML = navHTML(here);
+    if (!el) return;
+
+    if (isIndexPage()) {
+      el.innerHTML = headerOnlyHTML();
+    } else {
+      el.innerHTML = headerWithNavHTML(here);
+    }
   }
 
   window.App = {
@@ -87,6 +111,6 @@
     fetchStore,
     getStore,
     getByPath,
-    mountNav
+    mountHeader
   };
 })();

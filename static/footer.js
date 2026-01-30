@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   fetch("/static/footer.html")
     .then(res => res.text())

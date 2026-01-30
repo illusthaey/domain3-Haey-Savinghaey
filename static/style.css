@@ -3,12 +3,10 @@
 :root{
   --bg:#fff;
   --text:#111;
-  --muted:rgba(0,0,0,0.6);
+  --muted:rgba(0,0,0,0.62);
   --line:rgba(0,0,0,0.12);
   --line2:rgba(0,0,0,0.18);
-  --card:#fff;
   --radius:16px;
-  --shadow:0 12px 28px rgba(0,0,0,0.08);
 }
 
 *{ box-sizing:border-box; }
@@ -38,60 +36,6 @@ code{ background:rgba(0,0,0,0.05); padding:2px 6px; border-radius:10px; }
   .grid.two,.grid.three{ grid-template-columns:1fr; }
 }
 
-/* Header/Nav: 흔들림 방지(고정폭) */
-.site-header{
-  position:sticky; top:0; z-index:50;
-  background:rgba(255,255,255,0.88);
-  backdrop-filter: blur(10px);
-  border-bottom:1px solid var(--line);
-}
-.topbar{
-  display:grid;
-  grid-template-columns: 1fr auto;
-  align-items:center;
-  gap:12px;
-}
-.brand-title{ font-weight:900; font-size:1.03rem; }
-.brand-sub{ margin-top:2px; font-size:0.90rem; color:var(--muted); }
-
-.nav{
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:12.5rem;
-  gap:8px;
-  justify-content:end;
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  padding-bottom:2px;
-}
-.nav::-webkit-scrollbar{ height:6px; }
-.nav::-webkit-scrollbar-thumb{ background:rgba(0,0,0,0.15); border-radius:999px; }
-
-.nav-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:40px;
-  padding:0 12px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:rgba(0,0,0,0.06);
-  font-weight:650; /* 활성 상태에서도 고정 */
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.nav-btn:hover{ background:rgba(0,0,0,0.10); }
-.nav-btn.is-active{
-  background:rgba(0,0,0,0.08);
-  border-color:var(--line2);
-}
-
-@media (max-width:860px){
-  .topbar{ grid-template-columns:1fr; }
-  .nav{ justify-content:start; grid-auto-columns:11.5rem; }
-}
-
 h1{ margin:8px 0 6px; font-size:1.6rem; }
 .subtitle{ margin:0 0 14px; color:var(--muted); line-height:1.5; }
 .local-h2{ margin:0 0 10px; font-size:1.1rem; }
@@ -106,11 +50,10 @@ h1{ margin:8px 0 6px; font-size:1.6rem; }
   margin:14px 0;
 }
 .card{
-  background:var(--card);
+  background:#fff;
   border:1px solid var(--line);
   border-radius:var(--radius);
   padding:12px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
 }
 .card + .card{ margin-top:10px; }
 
@@ -138,7 +81,7 @@ h1{ margin:8px 0 6px; font-size:1.6rem; }
 }
 .btn:hover{ background:rgba(0,0,0,0.10); }
 
-input[type="text"], input[type="date"], textarea{
+input[type="text"], input[type="date"], textarea, select{
   width:100%;
   padding:10px 12px;
   border-radius:14px;
@@ -153,105 +96,172 @@ textarea{ resize:vertical; }
   border-top:1px solid var(--line);
   background:rgba(0,0,0,0.02);
 }
-.site-footer p{
-  margin:0; padding:14px 0;
+.site-footer .shell{
   color:var(--muted);
   text-align:center;
+  padding:14px 16px;
 }
-
-/* === (기존 style.css 내용은 유지) === */
 
 /* =============================
-   문서 편집 탭 UI
+   (요청) 상단 타이틀/헤드라인
    ============================= */
-.tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: 10px 0 14px;
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
 }
 
-.tab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  padding: 0 12px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.12);
-  background: rgba(0,0,0,0.06);
-  cursor: pointer;
-  font-weight: 650;
-  white-space: nowrap;
+.header-hero{ padding: 18px 0 10px; }
+.header-title{
+  text-align:center;
+  font-weight:900;
+  font-size:1.55rem;
+  letter-spacing:-0.2px;
+  margin:0;
+}
+.header-byline{
+  margin-top:6px;
+  text-align:right;
+  color:rgba(0,0,0,0.65);
+  font-weight:650;
+  font-size:0.95rem;
+}
+.header-rule{
+  margin-top:14px;
+  height:8px;
+  background:rgba(0,0,0,0.18);
+  border-radius:999px;
 }
 
-.tab[aria-selected="true"] {
-  background: rgba(0,0,0,0.10);
-  border-color: rgba(0,0,0,0.18);
+/* =============================
+   상세페이지 메뉴바
+   - 가로폭 부족 시 줄바꿈
+   - 어느 메뉴를 눌러도 레이아웃 고정
+   ============================= */
+.nav{
+  display:flex;
+  flex-wrap:wrap;           /* 줄바꿈 허용 */
+  gap:8px;
+  justify-content:center;   /* 중앙 정렬 */
+  padding: 10px 0 12px;
 }
 
-.tab-panel { display: none; }
-.tab-panel.is-open { display: block; }
+/* 버튼 폭 고정: 텍스트 길이/활성 상태에 따른 흔들림 방지 */
+.nav-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:40px;
 
-.editor-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* 고정 폭 정책: 너무 길면 줄이기(ellipsis), 너무 짧으면 늘리기 */
+  min-width: 190px;
+  max-width: 190px;
+
+  padding:0 12px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,0.06);
+
+  font-weight:650;          /* active에서도 동일 */
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.nav-btn:hover{ background:rgba(0,0,0,0.10); }
+
+/* 활성 상태는 색만 변경(폰트/테두리 두께 변화 금지) */
+.nav-btn.is-active{
+  background:rgba(0,0,0,0.10);
+  border-color:var(--line2);
+}
+
+/* 화면이 좁을 때 버튼 폭을 조금 줄여서 줄바꿈을 덜 과격하게 */
+@media (max-width: 520px){
+  .nav-btn{ min-width: 160px; max-width: 160px; }
+}
+
+/* =============================
+   메인페이지 카드형 메뉴
+   ============================= */
+.menu-cards{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
   gap: 12px;
 }
-
-@media (max-width: 860px) {
-  .editor-grid { grid-template-columns: 1fr; }
+@media (max-width: 860px){
+  .menu-cards{ grid-template-columns: 1fr; }
 }
 
-.editor-box textarea {
-  min-height: 280px;
-  width: 100%;
+.menu-card{
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  background:#fff;
+  padding: 16px;
+  display:flex;
+  flex-direction:column;
+  gap: 8px;
 }
-
-.kv {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 10px;
-  align-items: center;
+.menu-card .title{
+  font-weight:900;
+  font-size:1.05rem;
 }
-
-@media (max-width: 640px) {
-  .kv { grid-template-columns: 1fr; }
+.menu-card .desc{
+  color:var(--muted);
+  line-height:1.4;
+}
+.menu-card .go{
+  margin-top: 6px;
+  display:inline-flex;
+  width: fit-content;
 }
 
 /* =============================
-   상단 타이틀/헤드라인(요청 레이아웃)
+   문서도구 탭/에디터
    ============================= */
-
-.header-hero{
-  padding: 18px 0 10px;
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:10px 0 14px;
 }
-
-.header-title{
-  text-align: center;
-  font-weight: 900;
-  font-size: 1.55rem;
-  letter-spacing: -0.2px;
-  margin: 0;
+.tab{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:40px;
+  padding:0 12px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,0.06);
+  cursor:pointer;
+  font-weight:650;
+  white-space:nowrap;
 }
-
-.header-byline{
-  margin-top: 6px;
-  text-align: right;
-  color: rgba(0,0,0,0.65);
-  font-weight: 650;
-  font-size: 0.95rem;
+.tab[aria-selected="true"]{
+  background:rgba(0,0,0,0.10);
+  border-color:var(--line2);
 }
+.tab-panel{ display:none; }
+.tab-panel.is-open{ display:block; }
 
-.header-rule{
-  margin-top: 14px;
-  height: 8px;
-  background: rgba(0,0,0,0.18); /* 회색 헤드라인 */
-  border-radius: 999px;
+.editor-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
 }
+@media (max-width:860px){
+  .editor-grid{ grid-template-columns: 1fr; }
+}
+.editor-box textarea{ min-height: 280px; }
 
-/* 기존 sticky 헤더가 있다면, 이 레이아웃이 자연스럽게 보이도록 */
-.site-header{
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(10px);
+.kv{
+  display:grid;
+  grid-template-columns: 140px 1fr;
+  gap:10px;
+  align-items:center;
+}
+@media (max-width:640px){
+  .kv{ grid-template-columns: 1fr; }
 }

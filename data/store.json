@@ -6,17 +6,20 @@
   },
   "calendar": {
     "events": [
-      { "id": "e1", "date": "2026-02-03", "time": "10:00", "title": "계약서 서명", "memo": "결재 라인 사전 확인" }
+      { "id": "e1", "date": "2026-02-03", "time": "10:00", "title": "계약서 서명", "memo": "결재 라인 사전 확인" },
+      { "id": "e2", "date": "2026-02-03", "time": "14:00", "title": "세입 마감 점검", "memo": "" }
     ]
   },
   "favorites": {
     "items": [
-      { "name": "에듀파인", "url": "https://example.com", "memo": "학교회계/수입관리" }
+      { "name": "에듀파인", "url": "https://example.com", "memo": "학교회계/수입관리" },
+      { "name": "나이스", "url": "https://example.com", "memo": "인사/복무" }
     ]
   },
   "approvers": {
     "status": [
-      { "name": "교장", "role": "최종 결재", "status": "재실", "until": "", "note": "" }
+      { "name": "교장", "role": "최종 결재", "status": "재실", "until": "", "note": "" },
+      { "name": "교감", "role": "중간 결재", "status": "출장", "until": "16:00", "note": "교육지원청" }
     ]
   },
   "manuals": {
@@ -32,15 +35,6 @@
           {
             "title": "협조요청 기본(기한 포함)",
             "body": "1. 관련: \n2. 위와 관련하여 아래 사항에 대하여 협조 요청드립니다.\n  가. 대상: \n  나. 내용: \n  다. 기한: \n3. 문의: \n"
-          }
-        ]
-      },
-      {
-        "name": "안내문(학부모/강사)",
-        "items": [
-          {
-            "title": "안내문 기본",
-            "body": "안녕하세요.\n아래와 같이 안내드리오니 확인 부탁드립니다.\n\n- 내용:\n- 일정:\n- 문의:\n"
           }
         ]
       }

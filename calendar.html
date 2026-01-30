@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>일정 달력(읽기 전용)</title>
+  <title>일정 달력</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
@@ -11,12 +11,12 @@
 
   <main class="container">
     <h1>일정 달력</h1>
-    <p class="subtitle">읽기 전용입니다. 일정 수정은 GitHub에서 <code>data/store.json</code>을 편집합니다.</p>
+    <p class="subtitle">읽기 전용. 일정은 GitHub에서 <code>calendar.events</code> 수정.</p>
 
     <section class="section">
       <div class="row between wrap">
         <div>
-          <div style="font-weight:900;" id="viewName">월간달력(읽기전용)</div>
+          <div style="font-weight:900;" id="viewName">월간달력</div>
           <div class="muted">기준일: <input id="date" type="date" style="max-width:220px;" /></div>
         </div>
         <div class="row wrap right">
@@ -30,17 +30,19 @@
     <div id="calWrap"></div>
   </main>
 
-  <footer class="site-footer"><div class="shell"><p>© 2026. 개인용 업무보조 페이지 · 읽기 전용</p></div></footer>
-
   <script src="/static/app.js"></script>
   <script src="/static/calendar_ro.js"></script>
   <script>
-    App.mountNav();
+    App.mountHeader();
     CalendarRO.init().catch(err => {
       console.error(err);
       document.getElementById("calWrap").innerHTML =
-        `<div class="section"><div class="muted">데이터 로드 실패: data/store.json 경로 및 배포 상태를 확인하세요.</div></div>`;
+        `<div class="section"><div class="muted">데이터 로드 실패: store.json 경로 확인</div></div>`;
     });
   </script>
+
+  <script src="/static/footer.js"></script>
+  <script src="/static/disable-copy.js"></script>
+  <script src="/static/global-loader.js?v=1"></script>
 </body>
 </html>
