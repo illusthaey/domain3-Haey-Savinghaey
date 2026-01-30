@@ -1,1 +1,81 @@
-업무 보조 도구
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>업무 효율화 도구 모음</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div id="app-nav"></div>
+
+  <main class="container">
+    <h1>업무 효율화 도구 모음</h1>
+    <p class="subtitle">업무를 “입력 → 변환 → 출력” 단계로 고정하면 반복 업무의 오류율이 감소합니다.</p>
+
+    <section class="section">
+      <h2 class="local-h2">도구 목록(예시)</h2>
+
+      <div class="tool-grid">
+        <div class="tool-card">
+          <div class="tool-head">
+            <div class="tool-title">PDF → 엑셀 변환기</div>
+            <p class="tool-sub">고지서/현황/품의서 등 PDF에서 표·텍스트를 추출해 엑셀로 정리</p>
+          </div>
+          <div class="tool-body">
+            <ul class="tool-list">
+              <li>입력: PDF</li>
+              <li>출력: xlsx</li>
+              <li>비고: 양식별 추출 규칙 필요</li>
+            </ul>
+            <div class="row right" style="margin-top:10px;">
+              <a class="btn btn-lightgrey" href="#">(추후 연결)</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-head">
+            <div class="tool-title">세입/징수 자료 정리</div>
+            <p class="tool-sub">미납/납부 현황을 “정형화 템플릿”으로 변환</p>
+          </div>
+          <div class="tool-body">
+            <ul class="tool-list">
+              <li>입력: PDF/엑셀</li>
+              <li>출력: 표준 템플릿 엑셀</li>
+            </ul>
+            <div class="row right" style="margin-top:10px;">
+              <a class="btn btn-lightgrey" href="#">(추후 연결)</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-card">
+          <div class="tool-head">
+            <div class="tool-title">체크리스트(업무별)</div>
+            <p class="tool-sub">마감/정산/검증 항목을 체크로 관리(실수 예방)</p>
+          </div>
+          <div class="tool-body">
+            <ul class="tool-list">
+              <li>운영: 표준 체크항목 + 사용자 커스텀</li>
+              <li>효과: 누락 방지 + 인수인계 보조</li>
+            </ul>
+            <div class="row right" style="margin-top:10px;">
+              <a class="btn btn-lightgrey" href="#">(추후 연결)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:12px;">
+        · 실제 업무 도구(업로드/변환)는 개별 페이지로 분리하는 방식이 유지보수에 유리합니다.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="shell"><p>© 2026. 개인용 업무보조 페이지</p></div></footer>
+
+  <script src="/static/app.js"></script>
+  <script>App.mountNav();</script>
+</body>
+</html>
