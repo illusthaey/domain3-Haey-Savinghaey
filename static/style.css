@@ -158,3 +158,64 @@ textarea{ resize:vertical; }
   color:var(--muted);
   text-align:center;
 }
+
+/* === (기존 style.css 내용은 유지) === */
+
+/* =============================
+   문서 편집 탭 UI
+   ============================= */
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0 14px;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.06);
+  cursor: pointer;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.tab[aria-selected="true"] {
+  background: rgba(0,0,0,0.10);
+  border-color: rgba(0,0,0,0.18);
+}
+
+.tab-panel { display: none; }
+.tab-panel.is-open { display: block; }
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 860px) {
+  .editor-grid { grid-template-columns: 1fr; }
+}
+
+.editor-box textarea {
+  min-height: 280px;
+  width: 100%;
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .kv { grid-template-columns: 1fr; }
+}
+
