@@ -103,16 +103,22 @@ textarea{ resize:vertical; }
 }
 
 /* =============================
-   (요청) 상단 타이틀/헤드라인
+   상단 타이틀(헤드라인은 제거한 버전)
    ============================= */
 .site-header{
-  position:sticky; top:0; z-index:50;
-  background:rgba(255,255,255,0.92);
+  position: sticky;  /* ← sticky: 스크롤 내려도 상단에 유지 */
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.92);
   backdrop-filter: blur(10px);
-  border-bottom:1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
-.header-hero{ padding: 18px 0 10px; }
+.header-hero{
+  position: relative; /* ← 좌측 상단 버튼 absolute 기준 */
+  padding: 18px 0 10px;
+}
+
 .header-title{
   text-align:center;
   font-weight:900;
@@ -120,6 +126,7 @@ textarea{ resize:vertical; }
   letter-spacing:-0.2px;
   margin:0;
 }
+
 .header-byline{
   margin-top:6px;
   text-align:right;
@@ -128,8 +135,46 @@ textarea{ resize:vertical; }
   font-size:0.95rem;
 }
 
+/* =============================
+   좌측 상단 sticky 느낌의 '메인으로 돌아가기' 버튼
+   - 헤더가 sticky이므로 버튼도 함께 sticky로 유지됨
+   ============================= */
+.header-actions{
+  position: absolute;
+  top: 14px;
+  left: 0; /* shell padding이 이미 있으므로 0이 자연스럽게 맞음 */
+}
 
+.header-home{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  height: 42px;
+  padding: 0 18px;
+
+  border-radius: 999px;
+  border: 1.5px solid #111;
+  background: #fff;
+
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.header-home:hover{
+  background: rgba(0,0,0,0.04);
+}
+
+/* 모바일에서는 타이틀이 너무 눌릴 수 있으니 버튼을 조금 줄임 */
+@media (max-width: 520px){
+  .header-home{
+    height: 38px;
+    padding: 0 14px;
+    font-size: 0.92rem;
+  }
+}
 
 /* =============================
    상세페이지 메뉴바
@@ -138,20 +183,18 @@ textarea{ resize:vertical; }
    ============================= */
 .nav{
   display:flex;
-  flex-wrap:wrap;           /* 줄바꿈 허용 */
+  flex-wrap:wrap;
   gap:8px;
-  justify-content:center;   /* 중앙 정렬 */
+  justify-content:center;
   padding: 10px 0 12px;
 }
 
-/* 버튼 폭 고정: 텍스트 길이/활성 상태에 따른 흔들림 방지 */
 .nav-btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   height:40px;
 
-  /* 고정 폭 정책: 너무 길면 줄이기(ellipsis), 너무 짧으면 늘리기 */
   min-width: 190px;
   max-width: 190px;
 
@@ -160,7 +203,7 @@ textarea{ resize:vertical; }
   border:1px solid var(--line);
   background:rgba(0,0,0,0.06);
 
-  font-weight:650;          /* active에서도 동일 */
+  font-weight:650;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -168,13 +211,11 @@ textarea{ resize:vertical; }
 
 .nav-btn:hover{ background:rgba(0,0,0,0.10); }
 
-/* 활성 상태는 색만 변경(폰트/테두리 두께 변화 금지) */
 .nav-btn.is-active{
   background:rgba(0,0,0,0.10);
   border-color:var(--line2);
 }
 
-/* 화면이 좁을 때 버튼 폭을 조금 줄여서 줄바꿈을 덜 과격하게 */
 @media (max-width: 520px){
   .nav-btn{ min-width: 160px; max-width: 160px; }
 }
@@ -262,27 +303,3 @@ textarea{ resize:vertical; }
 @media (max-width:640px){
   .kv{ grid-template-columns: 1fr; }
 }
-
-/* 헤더 상단 액션(메인으로 버튼) */
-.header-actions{
-  display:flex;
-  justify-content:flex-end;
-  margin-top: 8px;
-}
-
-.header-home{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:40px;
-  padding:0 12px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:rgba(0,0,0,0.06);
-  font-weight:650;
-  white-space:nowrap;
-}
-.header-home:hover{ background:rgba(0,0,0,0.10); }
-
-
-
