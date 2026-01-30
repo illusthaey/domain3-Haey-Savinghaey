@@ -1,16 +1,18 @@
 // static/app.js
 // 역할:
-// - 메인(index.html): 타이틀/제작문구만 표시(메뉴바/메인버튼 없음)
-// - 상세페이지: 타이틀/제작문구 + 좌측 상단 "메인으로 돌아가기" + 메뉴바 표시
+// - 메인(index.html): 타이틀/제작문구만 표시(메뉴바 없음)
+// - 상세페이지: 타이틀/제작문구 + 메뉴바 표시(첫 버튼=메인으로 돌아가기)
 // - data/store.json 읽기(캐시 우회) 유틸 제공
 
 (function () {
   const NAV = [
-    { href: "/tools.html", label: "업무 효율화 도구 모음" },
-    { href: "/assist-tools.html", label: "업무보조 도구 모음" },
-    { href: "/calendar.html", label: "일정 달력" },
-    { href: "/favorites.html", label: "즐겨찾기" },
-    { href: "/manuals.html", label: "편람(PDF)" }
+    // 요청 순서 반영
+    { href: "/index.html",       label: "메인으로 돌아가기" },
+    { href: "/calendar.html",    label: "업무 일정 달력" },
+    { href: "/tools.html",       label: "업무 효율화 도구 모음" },
+    { href: "/assist-tools.html",label: "보조 도구 모음" },
+    { href: "/manuals.html",     label: "업무 자료 모음" },
+    { href: "/favorites.html",   label: "외부 사이트 모음" }
   ];
 
   function escapeHtml(str) {
@@ -40,7 +42,7 @@
     return await res.json();
   }
 
-  // 페이지당 1회만 로드(동일 페이지 내 중복 fetch 방지)
+  // 페이지당 1회만 로드
   const getStore = (function () {
     let memo = null;
     return async function () {
@@ -90,11 +92,6 @@
         <div class="shell">
 
           <div class="header-hero">
-            <!-- 좌측 상단: 메인으로(헤더가 sticky라 함께 고정) -->
-            <div class="header-actions">
-              <a class="header-home" href="/index.html">메인으로 돌아가기</a>
-            </div>
-
             <h1 class="header-title">(타이틀) 개인 업무 보조 웹페이지</h1>
             <div class="header-byline">-제작·운영: 천재 고주무관</div>
           </div>
