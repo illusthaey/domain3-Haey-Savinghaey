@@ -219,3 +219,39 @@ textarea{ resize:vertical; }
   .kv { grid-template-columns: 1fr; }
 }
 
+/* =============================
+   상단 타이틀/헤드라인(요청 레이아웃)
+   ============================= */
+
+.header-hero{
+  padding: 18px 0 10px;
+}
+
+.header-title{
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.55rem;
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+.header-byline{
+  margin-top: 6px;
+  text-align: right;
+  color: rgba(0,0,0,0.65);
+  font-weight: 650;
+  font-size: 0.95rem;
+}
+
+.header-rule{
+  margin-top: 14px;
+  height: 8px;
+  background: rgba(0,0,0,0.18); /* 회색 헤드라인 */
+  border-radius: 999px;
+}
+
+/* 기존 sticky 헤더가 있다면, 이 레이아웃이 자연스럽게 보이도록 */
+.site-header{
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+}
