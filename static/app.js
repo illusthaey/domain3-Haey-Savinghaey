@@ -1,7 +1,7 @@
 // static/app.js
 // 역할:
-// - 메인(index.html): 타이틀/제작문구/헤드라인만 표시(메뉴바 없음)
-// - 상세페이지(그 외): 타이틀/제작문구/헤드라인 + 메뉴바 + "메인페이지로" 버튼 표시
+// - 메인(index.html): 타이틀/제작문구만 표시(메뉴바/메인버튼 없음)
+// - 상세페이지: 타이틀/제작문구 + 좌측 상단 "메인으로 돌아가기" + 메뉴바 표시
 // - data/store.json 읽기(캐시 우회) 유틸 제공
 
 (function () {
@@ -90,14 +90,13 @@
         <div class="shell">
 
           <div class="header-hero">
+            <!-- 좌측 상단: 메인으로(헤더가 sticky라 함께 고정) -->
+            <div class="header-actions">
+              <a class="header-home" href="/index.html">메인으로 돌아가기</a>
+            </div>
+
             <h1 class="header-title">(타이틀) 개인 업무 보조 웹페이지</h1>
             <div class="header-byline">-제작·운영: 천재 고주무관</div>
-            <div class="header-rule" aria-hidden="true"></div>
-
-            <!-- 상세페이지 전용: 메인으로 -->
-            <div class="header-actions">
-              <a class="header-home" href="/index.html">메인페이지로</a>
-            </div>
           </div>
 
           <nav class="nav" aria-label="상단 메뉴">
@@ -137,4 +136,3 @@
     mountHeader
   };
 })();
-
