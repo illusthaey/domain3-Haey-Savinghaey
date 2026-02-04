@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>일정 달력</title>
+  <title>업무 일정 달력</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
   <div id="app-nav"></div>
 
   <main class="container">
-    <h1>일정 달력</h1>
-    <p class="subtitle">읽기 전용. 일정은 GitHub에서 <code>calendar.events</code> 수정.</p>
+    <h1>업무 일정 달력</h1>
+    <p class="subtitle">업무 일정 표시용 달력</p>
 
     <section class="section">
       <div class="row between wrap">
@@ -20,9 +20,9 @@
           <div class="muted">기준일: <input id="date" type="date" style="max-width:220px;" /></div>
         </div>
         <div class="row wrap right">
-          <button class="btn" id="btnMonth">월간</button>
-          <button class="btn" id="btnWeek">주간</button>
-          <button class="btn" id="btn3day">3일</button>
+          <button class="btn" id="btnMonth">월간 달력</button>
+          <button class="btn" id="btnWeek">주간 달력</button>
+          <button class="btn" id="btn3day">3일만 보기</button>
         </div>
       </div>
     </section>
@@ -37,7 +37,7 @@
     CalendarRO.init().catch(err => {
       console.error(err);
       document.getElementById("calWrap").innerHTML =
-        `<div class="section"><div class="muted">데이터 로드 실패: store.json 경로 확인</div></div>`;
+        `<div class="section"><div class="muted">데이터 없음</div></div>`;
     });
   </script>
 
@@ -46,3 +46,4 @@
   <script src="/static/global-loader.js?v=1"></script>
 </body>
 </html>
+
