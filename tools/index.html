@@ -8,129 +8,38 @@
 </head>
 
 <body>
-  <!-- 공통 상단 네비게이션 -->
   <div id="app-nav"></div>
 
   <main class="container">
     <h1>업무 효율화 도구 모음</h1>
     <p class="subtitle">
-      검증 완료된 계산기·업무 도구로 바로 이동합니다.<br/>
-      (실행 도구는 배포용 도메인에서 유지 관리됩니다)
+      도구 목록은 JSON(메타 데이터) 기반으로 자동 생성됩니다.<br/>
+      실행 도구는 배포용 도메인(검증된 원본)으로 연결됩니다.
     </p>
 
-    <!-- =========================
-         노무제공자 / 방과후강사
-    ========================== -->
+    <!-- (선택) 운영 원칙: 기존 tools.html 내용 유지 -->
     <section class="section">
-      <h2 class="local-h2">노무제공자 (방과후강사 등)</h2>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/pay-afterschool-teacher/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">방과후강사 월보수액 계산기</div>
-        <div class="muted" style="margin-top:6px;">
-          강사료 입력 → 월보수액·산재보험료 자동 산출
-        </div>
-      </a>
+      <h2 class="local-h2">운영 원칙</h2>
+      <div class="card">
+        <div style="font-weight:900;">1) 입력 → 변환 → 출력</div>
+        <div class="muted" style="margin-top:6px;">단계 고정이 오류율을 줄입니다.</div>
+      </div>
+      <div class="card">
+        <div style="font-weight:900;">2) 목록은 tools-meta.json에서만 관리</div>
+        <div class="muted" style="margin-top:6px;">페이지는 자동 생성, 데이터만 수정합니다.</div>
+      </div>
     </section>
 
-    <!-- =========================
-         교육공무직 인건비
-    ========================== -->
-    <section class="section">
-      <h2 class="local-h2">교육공무직 인건비 관련</h2>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/ordinary-wage/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">교육공무직 통상임금 계산기</div>
-        <div class="muted" style="margin-top:6px;">
-          직종별 보수표 반영
-        </div>
-      </a>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/cook-industrial-safety-education-pay/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">조리종사원 산업안전보건교육비 계산기</div>
-        <div class="muted" style="margin-top:6px;">
-          집체·온라인 교육비 산출
-        </div>
-      </a>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/effect-of-working-during-vacation/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">방학중 비상시근로자 보수 영향 계산기</div>
-        <div class="muted" style="margin-top:6px;">
-          출근율·연차 산정
-        </div>
-      </a>
-    </section>
-
-    <!-- =========================
-         휴가 · 수당
-    ========================== -->
-    <section class="section">
-      <h2 class="local-h2">휴가 · 수당</h2>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/annual-leave/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">연차 계산</div>
-        <div class="muted" style="margin-top:6px;">
-          기본 연차 산정
-        </div>
-      </a>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/annual-leave-pay/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">연차수당 계산</div>
-        <div class="muted" style="margin-top:6px;">
-          연차수당 산출
-        </div>
-      </a>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/vacation-weekly-holiday-wage/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">휴업·주휴·휴일수당 계산</div>
-        <div class="muted" style="margin-top:6px;">
-          주휴·휴일 관련 산식 정리
-        </div>
-      </a>
-    </section>
-
-    <!-- =========================
-         기타 행정 계산
-    ========================== -->
-    <section class="section">
-      <h2 class="local-h2">기타 행정 계산</h2>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/user-fee-ratio/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">수익자부담경비 비율 계산</div>
-        <div class="muted" style="margin-top:6px;">
-          분담 비율·금액 산정
-        </div>
-      </a>
-
-      <a class="card"
-         href="https://edusprouthaey.co.kr/wage-ledger-2025/"
-         target="_blank" rel="noopener">
-        <div style="font-weight:900;">임금대장(2025) 작성 보조</div>
-        <div class="muted" style="margin-top:6px;">
-          대장 작성 지원
-        </div>
-      </a>
-    </section>
+    <!-- 자동 렌더링 영역 -->
+    <div id="tools-status" class="muted" style="margin: 12px 0;"></div>
+    <div id="tools-root"></div>
   </main>
 
-  <!-- 공통 스크립트 -->
   <script src="/static/app.js"></script>
   <script>App.mountHeader();</script>
+
+  <!-- tools 렌더러 -->
+  <script src="/static/tools-render.js"></script>
 
   <script src="/static/footer.js"></script>
   <script src="/static/disable-copy.js"></script>
