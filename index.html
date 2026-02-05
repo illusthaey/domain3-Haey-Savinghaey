@@ -12,15 +12,14 @@
   <main class="container">
     <section class="section">
       <h2 class="local-h2">메뉴</h2>
-      <div class="menu-cards">
 
+      <div class="menu-cards">
         <a class="menu-card" href="/calendar.html">
           <div class="title">업무 일정 달력</div>
           <div class="desc">월간, 주간, 사흘 단위로 일정 조회</div>
           <span class="btn go">바로가기</span>
         </a>
 
-        <!-- ✅ tools.html 삭제에 따른 경로 수정: /tools/ 로 진입 -->
         <a class="menu-card" href="/tools/">
           <div class="title">업무 효율화 도구 모음</div>
           <div class="desc">배포용 도구(edusprouthaey.co.kr)로 연결되는 목록(자동 렌더링)</div>
@@ -29,28 +28,50 @@
 
         <a class="menu-card" href="/assist-tools.html">
           <div class="title">보조 도구 모음</div>
-          <div class="desc">만 나이 계산기, pdf 변환기 등 부가적인 도구들</div>
+          <div class="desc">문서 편집/정리 등 부가 도구(브라우저 내 처리, 저장 없음)</div>
           <span class="btn go">바로가기</span>
         </a>
 
         <a class="menu-card" href="/manuals.html">
           <div class="title">업무 자료 모음</div>
-          <div class="desc">편람, 지침, 운영계획 등 </div>
+          <div class="desc">편람, 지침, 운영계획 등 파일 목록</div>
           <span class="btn go">바로가기</span>
         </a>
 
         <a class="menu-card" href="/favorites.html">
           <div class="title">외부 사이트 모음</div>
-          <div class="desc">자주 들어가는 사이트 링크 즐겨찾기 모음들</div>
+          <div class="desc">자주 들어가는 사이트 링크(즐겨찾기)</div>
           <span class="btn go">바로가기</span>
         </a>
-
       </div>
 
-      <div class="muted" style="margin-top:12px;">
-        · 데이터 수정: GitHub에서 <code>data/store.json</code>(달력/결재권자/헤더) 및
-        <code>static/tools-meta.json</code>(도구 목록) 편집 후 커밋<br/>
-        · 본 사이트는 읽기 전용 운영(웹에서 저장 기능 없음)
+      <div class="card" style="margin-top:12px;">
+        <div style="font-weight:900;">운영 안내</div>
+        <div class="muted" style="margin-top:6px; line-height:1.6;">
+          · 데이터 수정: GitHub에서 <code>data/store.json</code>(달력/결재권자/자료/즐겨찾기) 및
+          <code>static/tools-meta.json</code>(도구 목록) 편집 후 커밋<br/>
+          · 본 사이트는 읽기 전용 운영(웹에서 저장 기능 없음)
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="local-h2">홈페이지 활용 방법(요약)</h2>
+      <div class="card">
+        <div style="font-weight:900;">1) 일정 추가</div>
+        <div class="muted" style="margin-top:6px;">data/store.json → calendar.events에 항목 추가</div>
+      </div>
+      <div class="card">
+        <div style="font-weight:900;">2) 도구 연결</div>
+        <div class="muted" style="margin-top:6px;">static/tools-meta.json에 도메인(base)와 도구(path) 등록</div>
+      </div>
+      <div class="card">
+        <div style="font-weight:900;">3) 자료 첨부</div>
+        <div class="muted" style="margin-top:6px;">리포지토리에 파일 업로드 후 data/store.json → manuals.list 등록</div>
+      </div>
+      <div class="card">
+        <div style="font-weight:900;">4) 즐겨찾기 추가</div>
+        <div class="muted" style="margin-top:6px;">data/store.json → favorites.items 등록</div>
       </div>
     </section>
 
@@ -69,12 +90,12 @@
 
   <script src="/static/app.js"></script>
   <script src="/static/dashboard.js"></script>
-
   <script>
     App.mountHeader();
     Dashboard.initMini().catch(err => {
       console.error(err);
-      document.getElementById("todayList").innerHTML = `<div class="muted">데이터 로드 실패: store.json 경로 확인</div>`;
+      document.getElementById("todayList").innerHTML =
+        `<div class="muted">데이터 로드 실패: store.json 경로 확인</div>`;
     });
   </script>
 
