@@ -1,18 +1,17 @@
 // static/app.js
 // 역할:
-// - 메인(index.html): 타이틀/제작문구만 표시(메뉴바 없음)
-// - 상세페이지: 타이틀/제작문구 + 메뉴바 표시(첫 버튼=메인으로 돌아가기)
+// - 메인(index): 타이틀/제작문구만 표시(메뉴바 없음)
+// - 상세페이지: 타이틀/제작문구 + 메뉴바 표시
 // - data/store.json 읽기(캐시 우회) 유틸 제공
 
 (function () {
   const NAV = [
-    // 요청 순서 반영
-    { href: "/index.html",       label: "메인으로 돌아가기" },
-    { href: "/calendar.html",    label: "업무 일정 달력" },
-    { href: "/tools.html",       label: "업무 효율화 도구 모음" },
-    { href: "/assist-tools.html",label: "보조 도구 모음" },
-    { href: "/manuals.html",     label: "업무 자료 모음" },
-    { href: "/favorites.html",   label: "외부 사이트 모음" }
+    { href: "/index.html",        label: "메인으로 돌아가기" },
+    { href: "/calendar.html",     label: "업무 일정 달력" },
+    { href: "/tools/",            label: "업무 효율화 도구 모음" }, // ✅ /tools.html → /tools/
+    { href: "/assist-tools.html", label: "보조 도구 모음" },
+    { href: "/manuals.html",      label: "업무 자료 모음" },
+    { href: "/favorites.html",    label: "외부 사이트 모음" }
   ];
 
   function escapeHtml(str) {
@@ -62,8 +61,28 @@
   }
 
   function isIndexPage() {
-    const p = location.pathname.endsWith("/") ? "/index.html" : location.pathname;
-    return p === "/index.html";
+    const p = location.pathname || "/";
+    return (p === "/" || p === "/index.html");
+  }
+
+  // ✅ 네비 활성화 경로 정규화
+  // - "/tools/" → "/tools/"
+  // - "/tools/index.html" → "/tools/"
+  // - "/tools" → "/tools/"
+  // - "/" → "/index.html" (단, index는 네비를 숨김)
+  function normalizeForNav(pathname) {
+    let p = (pathname || "/").trim();
+    if (p === "/") return "/index.html";
+
+    if (p.endsWith("/index.html") && p !== "/index.html") {
+      p = p.slice(0, -("index.html".length)); // "/tools/index.html" -> "/tools/"
+    }
+
+    if (p !== "/" && !p.endsWith("/") && !p.includes(".")) {
+      p = p + "/"; // "/tools" -> "/tools/"
+    }
+
+    return p;
   }
 
   function headerOnlyHTML() {
@@ -71,8 +90,8 @@
       <header class="site-header">
         <div class="shell">
           <div class="header-hero">
-            <h1 class="header-title">(타이틀) 개인 업무 보조 웹페이지</h1>
-            <div class="header-byline">-제작·운영: 천재 고주무관</div>
+            <h1 class="header-title">개인 업무 보조 웹페이지</h1>
+            <div class="header-byline">제작·운영: 천재 고주무관</div>
           </div>
         </div>
       </header>
@@ -90,32 +109,34 @@
     return `
       <header class="site-header">
         <div class="shell">
-
           <div class="header-hero">
-            <h1 class="header-title">(타이틀) 개인 업무 보조 웹페이지</h1>
-            <div class="header-byline">-제작·운영: 천재 고주무관</div>
+            <h1 class="header-title">개인 업무 보조 웹페이지</h1>
+            <div class="header-byline">제작·운영: 천재 고주무관</div>
           </div>
 
           <nav class="nav" aria-label="상단 메뉴">
             ${items}
           </nav>
-
         </div>
       </header>
     `;
   }
 
   function mountHeader() {
-    const here = location.pathname.endsWith("/") ? "/index.html" : location.pathname;
     const el = document.getElementById("app-nav");
     if (!el) return;
 
     if (isIndexPage()) {
       el.innerHTML = headerOnlyHTML();
-    } else {
-      el.innerHTML = headerWithNavHTML(here);
+      return;
     }
+
+    const activePath = normalizeForNav(location.pathname || "/");
+    el.innerHTML = headerWithNavHTML(activePath);
   }
+
+  // ✅ 기존 파일 호환용 별칭 (assist-tools.html 등에서 mountNav 호출해도 깨지지 않게)
+  function mountNav() { mountHeader(); }
 
   window.App = {
     // util
@@ -130,6 +151,7 @@
     getByPath,
 
     // header
-    mountHeader
+    mountHeader,
+    mountNav
   };
 })();
